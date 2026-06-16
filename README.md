@@ -4,6 +4,13 @@
 
 ![](/project.svg)
 
+## Inputs
+
+- **Base1** (number)
+- **Base2** (number)
+- **Height(Y)** (number)
+
+
 
 
  
