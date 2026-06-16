@@ -4,6 +4,21 @@
   "y": 0,
   "uniqueID": "id-596",
   "name": "Trapezoid",
+  "ioValues": [
+    {
+      "name": "Base1",
+      "ioValue": 30,
+      "currentEquation": "30"
+    },
+    {
+      "name": "Base2",
+      "ioValue": 10
+    },
+    {
+      "name": "Height(Y)",
+      "ioValue": 10
+    }
+  ],
   "topLevel": true,
   "allAtoms": [
     {
@@ -20,46 +35,76 @@
     },
     {
       "atomType": "Code",
-      "x": 0.4384920634920635,
-      "y": 0.5173410404624277,
+      "x": 0.46494708994708994,
+      "y": 0.44219653179190754,
       "uniqueID": "id-599",
       "ioValues": [
-        {
-          "name": "width",
-          "ioValue": 40
-        },
-        {
-          "name": "depth",
-          "ioValue": 30
-        },
-        {
-          "name": "thickness",
-          "ioValue": 5
-        },
-        {
-          "name": "holeRadius",
-          "ioValue": 6
-        },
         {
           "name": "color",
           "ioValue": "#5B9BD5",
           "currentEquation": "#5B9BD5"
         },
         {
-          "name": "addFillet",
-          "ioValue": true
+          "name": "Base1",
+          "ioValue": 30
         },
         {
-          "name": "extra",
-          "ioValue": "__GEOMETRY_INPUT__"
+          "name": "Base2",
+          "ioValue": 10
+        },
+        {
+          "name": "Height",
+          "ioValue": 10
         }
       ],
       "interpreterVersion": 1,
-      "code": "/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n */\nfunction run(\n  Base1: number = 40, // bottom base length (mm)\n  Base2: number = 20, // top base length (mm)\n  Height: number = 25, // height between bases (mm)\n  color: string = \"#5B9BD5\",\n): Assembly {\n  const halfH = Height / 2;\n\n  // Four corners, symmetric about the Y axis (isosceles)\n  const shape = replicad\n    .draw([-Base1 / 2, -halfH]) // bottom-left\n    .lineTo([Base1 / 2, -halfH]) // bottom-right\n    .lineTo([Base2 / 2, halfH]) // top-right\n    .lineTo([-Base2 / 2, halfH]) // top-left\n    .close();\n\n  return new Assembly({\n    geometry: shape,\n    color: color,\n    tags: [\"trapezoid\", \"2D\"],\n    bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n  });\n}",
-      "compiledCode": "\"use strict\";\n/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n */\nfunction run(Base1 = 40, // bottom base length (mm)\nBase2 = 20, // top base length (mm)\nHeight = 25, // height between bases (mm)\ncolor = \"#5B9BD5\") {\n    const halfH = Height / 2;\n    // Four corners, symmetric about the Y axis (isosceles)\n    const shape = replicad\n        .draw([-Base1 / 2, -halfH]) // bottom-left\n        .lineTo([Base1 / 2, -halfH]) // bottom-right\n        .lineTo([Base2 / 2, halfH]) // top-right\n        .lineTo([-Base2 / 2, halfH]) // top-left\n        .close();\n    return new Assembly({\n        geometry: shape,\n        color: color,\n        tags: [\"trapezoid\", \"2D\"],\n        bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n    });\n}\n"
+      "code": "/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n *\n * @param Base1  bottom base length (mm)\n * @param Base2  top base length (mm)\n * @param Height height between bases (mm)\n */\nfunction run(\n  Base1: number = 40,\n  Base2: number = 20,\n  Height: number = 25,\n  color: string = \"#5B9BD5\",\n): Assembly {\n  const halfH = Height / 2;\n\n  // Four corners, symmetric about the Y axis (isosceles)\n  const shape = replicad\n    .draw([-Base1 / 2, -halfH]) // bottom-left\n    .lineTo([Base1 / 2, -halfH]) // bottom-right\n    .lineTo([Base2 / 2, halfH]) // top-right\n    .lineTo([-Base2 / 2, halfH]) // top-left\n    .close();\n\n  return new Assembly({\n    geometry: shape,\n    color: color,\n    tags: [\"trapezoid\", \"2D\"],\n    bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n  });\n}",
+      "compiledCode": "\"use strict\";\n/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n *\n * @param Base1  bottom base length (mm)\n * @param Base2  top base length (mm)\n * @param Height height between bases (mm)\n */\nfunction run(Base1 = 40, Base2 = 20, Height = 25, color = \"#5B9BD5\") {\n    const halfH = Height / 2;\n    // Four corners, symmetric about the Y axis (isosceles)\n    const shape = replicad\n        .draw([-Base1 / 2, -halfH]) // bottom-left\n        .lineTo([Base1 / 2, -halfH]) // bottom-right\n        .lineTo([Base2 / 2, halfH]) // top-right\n        .lineTo([-Base2 / 2, halfH]) // top-left\n        .close();\n    return new Assembly({\n        geometry: shape,\n        color: color,\n        tags: [\"trapezoid\", \"2D\"],\n        bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n    });\n}\n"
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.43352601156069365,
+      "uniqueID": "id-611",
+      "name": "Base1"
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.6473988439306358,
+      "uniqueID": "id-614",
+      "name": "Base2"
+    },
+    {
+      "atomType": "Input",
+      "x": 0.025384615384615384,
+      "y": 0.8294797687861271,
+      "uniqueID": "id-617",
+      "name": "Height(Y)"
     }
   ],
-  "allConnectors": [],
+  "allConnectors": [
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-599",
+      "ap2ID": "id-597"
+    },
+    {
+      "ap2Name": "Base1",
+      "ap1ID": "id-611",
+      "ap2ID": "id-599"
+    },
+    {
+      "ap2Name": "Base2",
+      "ap1ID": "id-614",
+      "ap2ID": "id-599"
+    },
+    {
+      "ap2Name": "Height",
+      "ap1ID": "id-617",
+      "ap2ID": "id-599"
+    }
+  ],
   "unitsKey": "Unitless",
   "fileTypeVersion": 1,
   "filetypeVersion": 1
