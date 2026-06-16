@@ -1,13 +1,66 @@
 {
-    "atomType": "Molecule",
-    "x": 0,
-    "y": 0,
-    "uniqueID": "id-596",
-    "name": "Trapezoid",
-    "topLevel": true,
-    "allAtoms": [],
-    "allConnectors": [],
-    "unitsKey": "Unitless",
-    "fileTypeVersion": 1,
-    "filetypeVersion": 1
+  "atomType": "Molecule",
+  "x": 0,
+  "y": 0,
+  "uniqueID": "id-596",
+  "name": "Trapezoid",
+  "topLevel": true,
+  "allAtoms": [
+    {
+      "atomType": "Output",
+      "x": 0.98,
+      "y": 0.5,
+      "uniqueID": "id-597",
+      "ioValues": [
+        {
+          "name": "number or geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "Code",
+      "x": 0.4384920634920635,
+      "y": 0.5173410404624277,
+      "uniqueID": "id-599",
+      "ioValues": [
+        {
+          "name": "width",
+          "ioValue": 40
+        },
+        {
+          "name": "depth",
+          "ioValue": 30
+        },
+        {
+          "name": "thickness",
+          "ioValue": 5
+        },
+        {
+          "name": "holeRadius",
+          "ioValue": 6
+        },
+        {
+          "name": "color",
+          "ioValue": "#5B9BD5",
+          "currentEquation": "#5B9BD5"
+        },
+        {
+          "name": "addFillet",
+          "ioValue": true
+        },
+        {
+          "name": "extra",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "interpreterVersion": 1,
+      "code": "/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n */\nfunction run(\n  Base1: number = 40, // bottom base length (mm)\n  Base2: number = 20, // top base length (mm)\n  Height: number = 25, // height between bases (mm)\n  color: string = \"#5B9BD5\",\n): Assembly {\n  const halfH = Height / 2;\n\n  // Four corners, symmetric about the Y axis (isosceles)\n  const shape = replicad\n    .draw([-Base1 / 2, -halfH]) // bottom-left\n    .lineTo([Base1 / 2, -halfH]) // bottom-right\n    .lineTo([Base2 / 2, halfH]) // top-right\n    .lineTo([-Base2 / 2, halfH]) // top-left\n    .close();\n\n  return new Assembly({\n    geometry: shape,\n    color: color,\n    tags: [\"trapezoid\", \"2D\"],\n    bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n  });\n}",
+      "compiledCode": "\"use strict\";\n/**\n * 2D isosceles trapezoid.\n * Base1 = bottom edge length, Base2 = top edge length,\n * Height = perpendicular distance between the two bases.\n * Centered on the origin in the XY plane.\n */\nfunction run(Base1 = 40, // bottom base length (mm)\nBase2 = 20, // top base length (mm)\nHeight = 25, // height between bases (mm)\ncolor = \"#5B9BD5\") {\n    const halfH = Height / 2;\n    // Four corners, symmetric about the Y axis (isosceles)\n    const shape = replicad\n        .draw([-Base1 / 2, -halfH]) // bottom-left\n        .lineTo([Base1 / 2, -halfH]) // bottom-right\n        .lineTo([Base2 / 2, halfH]) // top-right\n        .lineTo([-Base2 / 2, halfH]) // top-left\n        .close();\n    return new Assembly({\n        geometry: shape,\n        color: color,\n        tags: [\"trapezoid\", \"2D\"],\n        bom: [`Isosceles trapezoid ${Base1}/${Base2}×${Height} mm`],\n    });\n}\n"
+    }
+  ],
+  "allConnectors": [],
+  "unitsKey": "Unitless",
+  "fileTypeVersion": 1,
+  "filetypeVersion": 1
 }
